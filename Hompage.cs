@@ -33,12 +33,10 @@ namespace Team_International_Project.Pages
 
 		public void NavigatePage()
 		{
-			foreach (IWebElement IWE in categoriesList)
-			{
-				IWebElement anchor = IWE.FindElement(By.TagName("a"));
-				Driver.Navigate().GoToUrl(anchor.GetAttribute("href")); 
-				System.Threading.Thread.Sleep(1500);			
-			}
+			for (int i=0; i<categoriesList.Count;i++)
+				NavigateToCathegory((Categories)i);
+
+
 		}
 
 		public void CheckLabels()
