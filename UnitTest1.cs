@@ -35,6 +35,7 @@ namespace Team_International_Project.Test
         {
             HomePage homepage = new HomePage(webDriver);
             homepage.MouseOverActions();
+            Assert.That(homepage.buttonBlueExists, Is.True, "Error. Top Gun Lab button isn't visible");
         }
 
         [TearDown]

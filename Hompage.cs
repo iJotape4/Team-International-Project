@@ -16,6 +16,7 @@ namespace Team_International_Project.Pages
 		private IList<IWebElement> categoriesList => categories.FindElements(By.TagName("li"));
 
 		public IList<IWebElement> labelsList => Driver.FindElements(By.TagName("label"));
+		public bool buttonBlueExists = true;
 
 		//Mouse Over Actions
 		private IList<IWebElement> industrialItems => Driver.FindElement(By.ClassName("industrial-row")).FindElements(By.ClassName("industrial-item"));
@@ -52,8 +53,9 @@ namespace Team_International_Project.Pages
 			PerformMouseOverActions(Categories.Services, action, leftCorner, servicesItems);
 			PerformMouseOverActions(Categories.Logos, action, leftCorner, logoitems);
 			
-
 			PerformMouseOverActionsOnLocation(Categories.Locations, action, leftCorner, locationItems);
+			buttonBlueExists= PerformMouseOverActionsOnTopGunLab(Categories.TopGunLab, action, leftCorner, locationItems);
+
 			/*foreach (var it in locationItems)
 				Console.WriteLine(it);*/
 
@@ -83,8 +85,7 @@ namespace Team_International_Project.Pages
 		private void PerformMouseOverActionsOnLocation(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList)
 		{
 			NavigateToCathegory(CategoryIndex, action, leftCorner);
-				
-			
+						
 			foreach (IWebElement item in InteractablesList)
 			{
 				if (item.Displayed) 
@@ -94,6 +95,20 @@ namespace Team_International_Project.Pages
 					System.Threading.Thread.Sleep(500);
 				}
 			}
+		}
+
+		private bool PerformMouseOverActionsOnTopGunLab(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
+		{
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+            IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn blue-hover bnr-career-link']"));
+
+			//Method to show button
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;	
+			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", blueButton);
+			System.Threading.Thread.Sleep(2000);
+			
+			action.MoveToElement(blueButton).Perform();
+			return blueButton.Displayed;
 		}
 
 
