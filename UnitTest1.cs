@@ -23,6 +23,20 @@ namespace Team_International_Project.Test
             homepage.NavigatePage();       
         }
 
+        [Test]
+        public void CheckLabels()
+        {
+            HomePage homepage = new HomePage(webDriver);
+            homepage.CheckLabels();
+        }
+        
+        [Test]
+        public void CheckMouseOver()
+        {
+            HomePage homepage = new HomePage(webDriver);
+            homepage.MouseOverActions();
+        }
+
         [TearDown]
         public void TearDown() => webDriver.Quit();
     }
