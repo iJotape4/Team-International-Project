@@ -40,6 +40,15 @@ namespace Team_International_Project.Test
             Assert.That(homePage.buttonGreenExists, Is.True, "Error. Empower Your Carreer button isn't visible");
         }
 
+        [Test]
+        public void FillOutForm() 
+        {
+            HomePage homePage = CreateHomePage();
+            homePage.FillFormAction();
+        }
+
+        public HomePage CreateHomePage() =>  new HomePage(webDriver);
+
         [TearDown]
         public void TearDown() => webDriver.Quit();
     }

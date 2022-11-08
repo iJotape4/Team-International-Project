@@ -133,6 +133,19 @@ namespace Team_International_Project.Pages
 			return blueButton.Displayed;
 		}
 
+		private void FillOutForm(Categories CategoryIndex, Actions action, IWebElement leftCorner) 
+		{
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			System.Threading.Thread.Sleep(2000);
+			//IWebElement form = Driver.FindElement(By.CssSelector("div['c-mqlform_mqlform class']"));
+			//IList<IWebElement> form = Driver.FindElement(By.ClassName("contact-section")).FindElements(By.TagName("input"));
+			IList<IWebElement> form = Driver.FindElement(By.ClassName("contact-section")).FindElement(By.CssSelector("iframe")).FindElements(By.TagName("body"));
+
+			Console.WriteLine(form.Count);
+			foreach (var x in form)
+				Console.WriteLine(x);
+		}
+
 
 
 		#endregion
