@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using OpenQA.Selenium;
 
 namespace Team_International_Project.Pages 
 {
-	public class HomePage
+	public class HomePage :Page
 	{
 		public HomePage(IWebDriver webDriver)
 		{
-			Driver = webDriver;
+			SetWebDriver(webDriver);
 		}
-
-		private IWebDriver Driver { get; }
 
 		public IWebElement categories => Driver.FindElement(By.Id("fp-nav"));
 		private IList<IWebElement> categoriesList => categories.FindElements(By.TagName("li"));
