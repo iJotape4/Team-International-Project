@@ -33,9 +33,11 @@ namespace Team_International_Project.Test
         [Test]
         public void CheckMouseOver()
         {
-            HomePage homepage = new HomePage(webDriver);
-            homepage.MouseOverActions();
-            Assert.That(homepage.buttonBlueExists, Is.True, "Error. Top Gun Lab button isn't visible");
+
+            HomePage homePage = CreateHomePage();
+            homePage.MouseOverActions();
+            Assert.That(homePage.buttonBlueExists, Is.True, "Error. Top Gun Lab button isn't visible");
+            Assert.That(homePage.buttonGreenExists, Is.True, "Error. Empower Your Carreer button isn't visible");
         }
 
         [TearDown]

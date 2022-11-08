@@ -17,6 +17,7 @@ namespace Team_International_Project.Pages
 
 		public IList<IWebElement> labelsList => Driver.FindElements(By.TagName("label"));
 		public bool buttonBlueExists = true;
+		public bool buttonGreenExists = true;
 
 		//Mouse Over Actions
 		private IList<IWebElement> industrialItems => Driver.FindElement(By.ClassName("industrial-row")).FindElements(By.ClassName("industrial-item"));
@@ -55,10 +56,18 @@ namespace Team_International_Project.Pages
 			
 			PerformMouseOverActionsOnLocation(Categories.Locations, action, leftCorner, locationItems);
 			buttonBlueExists= PerformMouseOverActionsOnTopGunLab(Categories.TopGunLab, action, leftCorner, locationItems);
+			buttonGreenExists= PerformMouseOverActionsOnImpowerYourCarrer(Categories.EmpowerYourCarrer, action, leftCorner, locationItems);
 
 			/*foreach (var it in locationItems)
 				Console.WriteLine(it);*/
 
+		}
+
+		public void FillFormAction() 
+		{
+			Actions action = new Actions(Driver);
+			IWebElement leftCorner = Driver.FindElement(By.ClassName("custom-logo-link"));
+			FillOutForm(Categories.ContactSales, action, leftCorner);
 		}
 
 		#region specific Categories Methods
@@ -101,6 +110,19 @@ namespace Team_International_Project.Pages
 		{
 			NavigateToCathegory(CategoryIndex, action, leftCorner);
             IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn blue-hover bnr-career-link']"));
+
+			//Method to show button
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;	
+			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", blueButton);
+			System.Threading.Thread.Sleep(2000);
+			
+			action.MoveToElement(blueButton).Perform();
+			return blueButton.Displayed;
+		}
+		private bool PerformMouseOverActionsOnImpowerYourCarrer(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
+		{
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+            IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
 
 			//Method to show button
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;	
