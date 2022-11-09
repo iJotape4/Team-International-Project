@@ -132,15 +132,15 @@ namespace Team_International_Project.Pages
 		private bool PerformMouseOverActionsOnImpowerYourCarrer(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
 		{
 			NavigateToCathegory(CategoryIndex, action, leftCorner);
-            IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
+            IWebElement greenButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
 
 			//Method to show button
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;	
-			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", blueButton);
+			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", greenButton);
 			System.Threading.Thread.Sleep(2000);
 			
-			action.MoveToElement(blueButton).Perform();
-			return blueButton.Displayed;
+			action.MoveToElement(greenButton).Perform();
+			return greenButton.Displayed;
 		}
 
 		private void PerformClickOnIndustryItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
