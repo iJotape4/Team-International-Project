@@ -41,6 +41,13 @@ namespace Team_International_Project.Test
         }
 
         [Test]
+        public void CheckMouseClick() 
+        {
+            HomePage homePage = CreateHomePage();
+            homePage.ClickMouseActions();
+        }
+
+        [Test]
         public void FillOutForm() 
         {
             HomePage homePage = CreateHomePage();

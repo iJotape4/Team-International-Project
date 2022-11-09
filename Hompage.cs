@@ -63,6 +63,16 @@ namespace Team_International_Project.Pages
 
 		}
 
+		public void ClickMouseActions()
+        {
+			Actions action = new Actions(Driver);
+			IWebElement leftCorner = Driver.FindElement(By.ClassName("custom-logo-link"));
+			PerformClickOnIndustryItems(Categories.Industry, action, leftCorner);
+			PerformClickOnServicesItms(Categories.Services, action, leftCorner);
+			PerformClickLogoItems(Categories.Services, action, leftCorner);
+			PerformClickLocationItems(Categories.Locations, action, leftCorner);
+		}
+
 		public void FillFormAction() 
 		{
 			Actions action = new Actions(Driver);
@@ -133,6 +143,62 @@ namespace Team_International_Project.Pages
 			return blueButton.Displayed;
 		}
 
+		private void PerformClickOnIndustryItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+        {
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			for (int i = 0; i < industrialItems.Count; i++)
+			{
+				action.Click(industrialItems[i]).Perform();
+				WaitAndBackPage();
+			}
+		}
+		private void PerformClickOnServicesItms(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+        {
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			for (int i = 0; i < servicesItems.Count; i++)
+			{
+				action.Click(servicesItems[i]).Perform();
+				WaitAndBackPage();
+			}
+		}
+		private void PerformClickLogoItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+		{
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			for (int i = 0; i < logoitems.Count; i++)
+			{
+				action.Click(logoitems[i]).Perform();
+				WaitAndBackPage();
+			}
+		}
+		private void PerformClickLocationItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+        {
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			for (int i = 0; i < locationItems.Count; i++)
+			{
+                if (locationItems[i].Displayed)
+                {
+					var button = locationItems[i].FindElement(By.CssSelector("a[class='btn btn-green btn-green-full']"));
+					action.Click(button);
+					if (button.GetAttribute("href") != Driver.Url)
+                    {
+						Console.WriteLine("Location item {0} button isn't opening their respective WebPage", button.GetAttribute("href").Split("#")[1]);
+                    }
+                    else
+                    {
+						WaitAndBackPage();
+                    }
+					Driver.FindElement(By.ClassName("location-slider")).FindElement(By.CssSelector("img[class='arrow-btn next slick-arrow']")).Click();
+					System.Threading.Thread.Sleep(500);
+                }
+			}
+		}
+		
+		private void WaitAndBackPage()
+        {
+			System.Threading.Thread.Sleep(500);
+			Driver.Navigate().Back();
+			System.Threading.Thread.Sleep(500);
+		}
 		private void FillOutForm(Categories CategoryIndex, Actions action, IWebElement leftCorner) 
 		{
 			NavigateToCathegory(CategoryIndex, action, leftCorner);
