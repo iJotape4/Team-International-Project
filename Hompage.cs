@@ -66,10 +66,6 @@ namespace Team_International_Project.Pages
 			PerformMouseOverActionsOnLocation(Categories.Locations, action, leftCorner, locationItems);
 			buttonBlueExists= PerformMouseOverActionsOnTopGunLab(Categories.TopGunLab, action, leftCorner, locationItems);
 			buttonGreenExists= PerformMouseOverActionsOnImpowerYourCarrer(Categories.EmpowerYourCarrer, action, leftCorner, locationItems);
-
-			/*foreach (var it in locationItems)
-				Console.WriteLine(it);*/
-
 		}
 
 		public void ClickMouseActions()
@@ -80,8 +76,7 @@ namespace Team_International_Project.Pages
 			PerformClickOnIndustryItems(Categories.Industry, action, leftCorner);
 			NavigateToCathegory(Categories.Services);
 			PerformClickOnServicesItms(Categories.Services, action, leftCorner);
-			//NavigateToCathegory(Categories.Logos);
-			//PerformClickLogoItems(Categories.Logos, action, leftCorner);
+
 			NavigateToCathegory(Categories.Locations);
 			PerformClickLocationItems(Categories.Locations, action, leftCorner);
 			System.Threading.Thread.Sleep(1500);
@@ -166,7 +161,6 @@ namespace Team_International_Project.Pages
 
 		private void PerformClickOnIndustryItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
         {
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
 			for (int i = 0; i < industrialItems.Count; i++)
 			{
 				action.Click(industrialItems[i]).Perform();
@@ -175,16 +169,15 @@ namespace Team_International_Project.Pages
 		}
 		private void PerformClickOnServicesItms(Categories CategoryIndex, Actions action, IWebElement leftCorner)
         {
-		//	NavigateToCathegory(CategoryIndex, action, leftCorner);
 			for (int i = 0; i < servicesItems.Count; i++)
 			{
 				action.Click(servicesItems[i]).Perform();
 				WaitAndBackPage(Categories.Services);
 			}
 		}
+		//Logos has not buttons, but could be used if we implement it
 		private void PerformClickLogoItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
 		{
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
 			for (int i = 0; i < logoitems.Count; i++)
 			{
 				action.Click(logoitems[i]).Perform();
@@ -193,7 +186,6 @@ namespace Team_International_Project.Pages
 		}
 		private void PerformClickLocationItems(Categories CategoryIndex, Actions action, IWebElement leftCorner)
         {
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
 			for (int i = 0; i < locationItems.Count; i++)
 			{
                 if (locationItems[i].Displayed)
@@ -216,7 +208,6 @@ namespace Team_International_Project.Pages
 		
 		private bool PerformClickOnTopGunLab(Categories CategoryIndex, Actions action, IWebElement leftCorner)
         {
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
 			IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn blue-hover bnr-career-link']"));
 
 			//Method to show button
@@ -227,13 +218,11 @@ namespace Team_International_Project.Pages
 			NavigateToCathegory(Categories.TopGunLab);
 			System.Threading.Thread.Sleep(500);
 			action.Click(blueButton).Perform();			
-			//WaitAndBackPage(Categories.TopGunLab);
 			return blueButton.Displayed;
 		}
 
 		private bool PerformClickOnEmpowerYourCarreer(Categories CategoryIndex, Actions action, IWebElement leftCorner)
         {
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
 			IWebElement greenButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
 
 			//Method to show button
@@ -244,7 +233,6 @@ namespace Team_International_Project.Pages
 			NavigateToCathegory(Categories.TopGunLab);
 			System.Threading.Thread.Sleep(500);
 			action.Click(greenButton).Perform();
-			//WaitAndBackPage(Categories.EmpowerYourCarrer);
 			return greenButton.Displayed;
 		}
 
@@ -260,19 +248,12 @@ namespace Team_International_Project.Pages
 		{
 			NavigateToCathegory(CategoryIndex, action, leftCorner);
 			System.Threading.Thread.Sleep(2000);
-			//IWebElement form = Driver.FindElement(By.CssSelector("div['c-mqlform_mqlform class']"));
-			//IWebElement form = Driver.FindElement(By.XPath("/html/body/webruntime-app/community_byo-scoped-header-and-footer/main/webruntime-router-container/community_layout-slds-flexible-layout/div/community_layout-section/div/div[3]/community_layout-column/div/c-mql-form/lightning-layout/slot/lightning-layout-item[3]/slot/lightning-layout/slot/lightning-layout-item[1]/slot/div/span/input"));
-			//IList<IWebElement> form = Driver.FindElements(By.TagName("span"));
 			IList<IWebElement> form = Driver.FindElements(By.TagName("span"));
-			//IWebElement w= Driver.FindElement(By.XPath("//input[@c-mqlform_mqlform='' @class='form-input' @type='text' @data-id='firstName' @size='255' @aria-required='true' @aria-invalid='false' @style='cursor: auto']"));
-			//Console.WriteLine(form.Count);
-			
-			Console.WriteLine("I'm Tired. I surrender, I cannot find form items");
+
+			Console.WriteLine("I'm Tired. I try in a lot of ways but I surrender, I cannot find form's items :c");
             
 				
 		} 
-
-
 
 		#endregion
 	}
