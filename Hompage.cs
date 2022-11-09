@@ -69,8 +69,10 @@ namespace Team_International_Project.Pages
 			IWebElement leftCorner = Driver.FindElement(By.ClassName("custom-logo-link"));
 			PerformClickOnIndustryItems(Categories.Industry, action, leftCorner);
 			PerformClickOnServicesItms(Categories.Services, action, leftCorner);
-			PerformClickLogoItems(Categories.Services, action, leftCorner);
+			PerformClickLogoItems(Categories.Logos, action, leftCorner);
 			PerformClickLocationItems(Categories.Locations, action, leftCorner);
+			PerformClickOnTopGunLab(Categories.TopGunLab, action, leftCorner);
+			PerformClickOnEmpowerYourCarreer(Categories.EmpowerYourCarrer, action, leftCorner);
 		}
 
 		public void FillFormAction() 
@@ -193,6 +195,43 @@ namespace Team_International_Project.Pages
 			}
 		}
 		
+		private bool PerformClickOnTopGunLab(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+        {
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			for (int i = 0; i < logoitems.Count; i++)
+			{
+				action.Click(logoitems[i]).Perform();
+				WaitAndBackPage();
+			}
+
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn blue-hover bnr-career-link']"));
+
+			//Method to show button
+			IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", blueButton);
+			System.Threading.Thread.Sleep(2000);
+
+			action.MoveToElement(blueButton).Click().Perform();			
+			WaitAndBackPage();
+			return blueButton.Displayed;
+		}
+
+		private bool PerformClickOnEmpowerYourCarreer(Categories CategoryIndex, Actions action, IWebElement leftCorner)
+        {
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
+			IWebElement greenButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
+
+			//Method to show button
+			IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+			js.ExecuteScript("arguments[0].style.visibility = 'visible', arguments[0].style.height = '50px'; arguments[0].style.width = '300px'; arguments[0].style.opacity = 1", greenButton);
+			System.Threading.Thread.Sleep(2000);
+
+			action.MoveToElement(greenButton).Click().Perform();
+			WaitAndBackPage();
+			return greenButton.Displayed;
+		}
+
 		private void WaitAndBackPage()
         {
 			System.Threading.Thread.Sleep(500);
