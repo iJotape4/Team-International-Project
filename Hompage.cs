@@ -33,6 +33,15 @@ namespace Team_International_Project.Pages
 			return true;
 		}
 
+		public void RunAlltests()
+        {
+			NavigatePage();
+			MouseOverActions();
+			ClickMouseActions();
+			NavigateToCathegory(Categories.ContactSales);
+			FillFormAction();
+        }
+
 		public void NavigatePage()
 		{
 			for (int i=0; i<categoriesList.Count;i++)
@@ -105,7 +114,7 @@ namespace Team_International_Project.Pages
 
 		private void PerformMouseOverActions(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
 		{
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
 			foreach (var item in InteractablesList)          
 				action.MoveToElement(item).Perform();
             
@@ -113,7 +122,7 @@ namespace Team_International_Project.Pages
 
 		private void PerformMouseOverActionsOnLocation(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList)
 		{
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
 						
 			foreach (IWebElement item in InteractablesList)
 			{
@@ -128,7 +137,7 @@ namespace Team_International_Project.Pages
 
 		private bool PerformMouseOverActionsOnTopGunLab(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
 		{
-			//NavigateToCathegory(CategoryIndex, action, leftCorner);
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
             IWebElement blueButton = Driver.FindElement(By.CssSelector("a[class='btn blue-hover bnr-career-link']"));
 
 			//Method to show button
@@ -143,6 +152,7 @@ namespace Team_International_Project.Pages
 		}
 		private bool PerformMouseOverActionsOnImpowerYourCarrer(Categories CategoryIndex, Actions action, IWebElement leftCorner, IList<IWebElement> InteractablesList) 
 		{
+			NavigateToCathegory(CategoryIndex, action, leftCorner);
             IWebElement greenButton = Driver.FindElement(By.CssSelector("a[class='btn btn-green blue-hover bnr-career-link']"));
 
 			//Method to show button

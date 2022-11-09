@@ -13,24 +13,25 @@ namespace Team_International_Project.Test
         public void Setup()
         {
             webDriver.Navigate().GoToUrl("https://www.teaminternational.com/");
+            //webDriver.Manage().Window.Maximize(); 
         }
 
-        [Test]
+        [Test, Order(1)]
         public void NavigateMainPage()
         {
             HomePage homepage = new HomePage(webDriver);
             Assert.That(homepage.CategoriesListExist, Is.True, "Error. Categories List not Found");
-            homepage.NavigatePage();       
+            homepage.NavigatePage();
         }
 
-        [Test]
+       /* [Test]
         public void CheckLabels()
         {
             HomePage homepage = new HomePage(webDriver);
             homepage.CheckLabels();
-        }
+        }*/
         
-        [Test]
+        [Test, Order(2)]
         public void CheckMouseOver()
         {
 
@@ -40,18 +41,27 @@ namespace Team_International_Project.Test
             Assert.That(homePage.buttonGreenExists, Is.True, "Error. Empower Your Carreer button isn't visible");
         }
 
-        [Test]
+        [Test, Order(3)]
         public void CheckMouseClick() 
         {
             HomePage homePage = CreateHomePage();
             homePage.ClickMouseActions();
+            Assert.That(homePage.buttonBlueExists, Is.True, "Error. Top Gun Lab button isn't visible");
+            Assert.That(homePage.buttonGreenExists, Is.True, "Error. Empower Your Carreer button isn't visible");
         }
 
-        [Test]
+        [Test, Order(4)]
         public void FillOutForm() 
         {
             HomePage homePage = CreateHomePage();
             homePage.FillFormAction();
+        }
+
+        [Test]
+        public void RunAllTests()
+        {
+            HomePage homePage = CreateHomePage();
+            homePage.RunAlltests();
         }
 
         public HomePage CreateHomePage() =>  new HomePage(webDriver);
